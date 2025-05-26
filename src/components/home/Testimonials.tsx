@@ -131,7 +131,7 @@ const Testimonials = () => {
 
                 <div className="md:w-2/3 md:pl-8">
                   <blockquote className="text-lg md:text-xl italic text-slate-700 dark:text-slate-200 mb-4">
-                    "{testimonials[activeTestimonial].text}"
+                    &quot;{testimonials[activeTestimonial].text}&quot;
                   </blockquote>
 
                   <div>
