@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Users, Home, Award, Building } from "lucide-react";
 
@@ -33,11 +33,11 @@ const StatsItem = ({
     let start = 0;
     const end = Math.min(value, 9999);
     const incrementTime = Math.max(duration / end, 5);
-    
+
     const counter = setInterval(() => {
       const nextCount = Math.ceil(start + (end - start) * 0.1);
       setCount(Math.min(nextCount, end));
-      
+
       if (nextCount === end) {
         clearInterval(counter);
       }
@@ -56,9 +56,7 @@ const StatsItem = ({
       onViewportEnter={() => setInView(true)}
       className="flex flex-col items-center"
     >
-      <div className={cn("p-4 rounded-full mb-4", color)}>
-        {icon}
-      </div>
+      <div className={cn("p-4 rounded-full mb-4", color)}>{icon}</div>
       <h3 className="text-3xl md:text-4xl font-bold mb-2">
         {prefix}
         {inView ? count : 0}

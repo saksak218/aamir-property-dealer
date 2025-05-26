@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import PropertyCard, { PropertyProps } from "@/components/common/PropertyCard";
 import { Button } from "@/components/ui/button-custom";
 import { Building2, Home, Warehouse, Building } from "lucide-react";

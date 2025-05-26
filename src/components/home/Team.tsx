@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 
 import image1 from "../../../public/images/team/1.jpeg";
