@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import PropertyCard, { PropertyProps } from "@/components/common/PropertyCard";
 import { Button } from "@/components/ui/button-custom";
 import { Building2, Home, Warehouse, Building } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 import image1 from "../../../public/images/property/1.jpeg";
 import image2 from "../../../public/images/property/2.jpeg";
@@ -13,7 +12,6 @@ import image3 from "../../../public/images/property/3.jpeg";
 import image4 from "../../../public/images/property/3.jpeg";
 import image5 from "../../../public/images/property/3.jpeg";
 import image6 from "../../../public/images/property/3.jpeg";
-import Image from "next/image";
 
 const propertyCategories = [
   { id: "all", name: "All", icon: <Building2 className="h-4 w-4 mr-2" /> },
