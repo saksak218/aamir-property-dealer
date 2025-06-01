@@ -5,6 +5,10 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Menu, X, Sun, Moon, Home, Building, Phone, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+
+import logo from "../../../public/images/logo/logo.png";
+import logo_bg from "../../../public/images/logo/logo-bg.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,14 +54,23 @@ const Header = () => {
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <Building className="h-8 w-8 text-primary" />
+              <div className="w-20">
+                {
+                  <Image
+                    className="rounded-md"
+                    src={isScrolled ? logo : logo_bg}
+                    alt="Logo"
+                  />
+                }
+              </div>
+              {/* <Building className="h-8 w-8 text-primary" />
               <span className="ml-2 text-xl font-bold tracking-tight text-foreground">
                 Aamir Property Dealer
-              </span>
+              </span> */}
             </Link>
           </div>
 
