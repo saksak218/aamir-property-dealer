@@ -7,7 +7,7 @@ import { Menu, X, Sun, Moon, Home, Building, Phone, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-import logo from "../../../public/images/logo/logo.png";
+import logo from "../../../public/images/logo/logo-1.png";
 import logo_bg from "../../../public/images/logo/logo-bg.png";
 
 const Header = () => {
@@ -31,17 +31,17 @@ const Header = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
-    { name: "Home", href: "/", icon: <Home className="h-4 w-4 mr-1" /> },
+    { name: "Home", href: "/", icon: <Home className="mr-1 w-4 h-4" /> },
     {
       name: "Properties",
       href: "#properties",
-      icon: <Building className="h-4 w-4 mr-1" />,
+      icon: <Building className="mr-1 w-4 h-4" />,
     },
-    { name: "About", href: "#about", icon: <Info className="h-4 w-4 mr-1" /> },
+    { name: "About", href: "#about", icon: <Info className="mr-1 w-4 h-4" /> },
     {
       name: "Contact",
       href: "#contact",
-      icon: <Phone className="h-4 w-4 mr-1" />,
+      icon: <Phone className="mr-1 w-4 h-4" />,
     },
   ];
 
@@ -49,26 +49,21 @@ const Header = () => {
     <header
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm dark:bg-slate-900/90"
-          : "bg-transparent"
+        // isScrolled
+        // ? "bg-white/90 backdrop-blur-md shadow-sm dark:bg-slate-900/90"
+        // :
+        "bg-transparent backdrop-blur-2xl"
       )}
     >
-      <div className="container mx-auto px-4 py-2 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
+        <div className="flex justify-between items-center h-16 md:h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <div className="w-20">
-                {
-                  <Image
-                    className="rounded-md"
-                    src={isScrolled ? logo : logo_bg}
-                    alt="Logo"
-                  />
-                }
+              <div className="w-12">
+                {<Image className="rounded-md" src={logo} alt="Logo" />}
               </div>
-              {/* <Building className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-xl font-bold tracking-tight text-foreground">
+              {/* <Building className="w-8 h-8 text-primary" />
+              <span className="ml-2 font-bold text-foreground text-xl tracking-tight">
                 Aamir Property Dealer
               </span> */}
             </Link>
@@ -80,7 +75,7 @@ const Header = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="flex items-center text-sm font-medium  hover:text-foreground transition-colors"
+                className="flex items-center font-medium hover:text-foreground text-sm transition-colors"
               >
                 {link.icon}
                 {link.name}
@@ -88,29 +83,29 @@ const Header = () => {
             ))}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full bg-secondary text-secondary-foreground text-gray-600 hover:bg-secondary/80 transition-colors"
+              className="hover:bg-secondary/80 p-2 rounded-full text-gray-600 text-secondary-foreground transition-colors"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <Sun className="h-5 w-5" />
+                <Sun className="w-5 h-5" />
               ) : (
-                <Moon className="h-5 w-5" />
+                <Moon className="w-5 h-5" />
               )}
             </button>
           </nav>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden">
+          <div className="md:hidden flex">
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-md text-foreground hover:bg-secondary transition-colors"
+              className="hover:bg-secondary p-2 rounded-md text-foreground transition-colors"
               aria-expanded={isOpen}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -120,12 +115,12 @@ const Header = () => {
       {/* Mobile navigation */}
       {isOpen && (
         <div className="md:hidden bg-background border-t">
-          <div className="container mx-auto px-4 pt-2 pb-3 space-y-1">
+          <div className="space-y-1 mx-auto px-4 pt-2 pb-3 container">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="flex items-center px-3 py-2 rounded-md text-base font-medium hover:bg-secondary transition-colors"
+                className="flex items-center hover:bg-secondary px-3 py-2 rounded-md font-medium text-base transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {link.icon}
@@ -138,16 +133,16 @@ const Header = () => {
                   setTheme(theme === "dark" ? "light" : "dark");
                   setIsOpen(false);
                 }}
-                className="flex items-center text-base font-medium hover:bg-secondary p-2 rounded-md transition-colors w-full"
+                className="flex items-center hover:bg-secondary p-2 rounded-md w-full font-medium text-base transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
                   <>
-                    <Sun className="h-5 w-5 mr-2" /> Light Mode
+                    <Sun className="mr-2 w-5 h-5" /> Light Mode
                   </>
                 ) : (
                   <>
-                    <Moon className="h-5 w-5 mr-2" /> Dark Mode
+                    <Moon className="mr-2 w-5 h-5" /> Dark Mode
                   </>
                 )}
               </button>
