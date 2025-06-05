@@ -28,19 +28,19 @@ export default function Banner() {
       </div>
 
       <button
-        onClick={(e) => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-x-2 text-white text-xs cursor-pointer"
       >
         Call us
         <Phone className="w-5" />
       </button>
-      {/* 
+
       {isOpen && (
         <div className="top-8 fixed bg-white px-3 py-2 rounded-md text-xs">
           <p>Call us</p>
           <p>+923005019850</p>
         </div>
-      )} */}
+      )}
     </div>
   );
 }
