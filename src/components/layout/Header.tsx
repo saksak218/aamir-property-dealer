@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 import logo from "../../../public/images/logo/logo-1.png";
+import Banner from "./Banner";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +55,7 @@ const Header = () => {
         "bg-transparent backdrop-blur-2xl"
       )}
     >
+      <Banner />
       <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
         <div className="flex justify-between items-center h-16 md:h-20">
           <div className="flex items-center">

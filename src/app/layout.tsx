@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased`}
+        className={`${inter.className} antialiased `}
         suppressHydrationWarning={true}
       >
         <ThemeProvider
@@ -30,7 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="w-full min-h-screen">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
