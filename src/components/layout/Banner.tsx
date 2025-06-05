@@ -36,7 +36,7 @@ export default function Banner() {
       </button>
 
       {isOpen && (
-        <div className="top-8 fixed bg-white px-3 py-2 rounded-md text-xs">
+        <div className="top-8 fixed bg-white px-3 py-2 rounded-md text-black text-xs">
           <p>Call us</p>
           <p>+923005019850</p>
         </div>
