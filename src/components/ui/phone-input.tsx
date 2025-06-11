@@ -1,4 +1,3 @@
-// components/ui/phone-input.tsx
 "use client";
 
 import * as React from "react";
@@ -29,10 +28,13 @@ type PhoneInputProps = RPNInput.Props<typeof RPNInput.default> & {
   onChange?: (value: RPNInput.Value) => void;
   className?: string;
   disabled?: boolean;
-  placeholder?: string; // Add placeholder
-  defaultCountry?: RPNInput.Country; // Add defaultCountry
-  international?: boolean; // Add international
-  withCountryCallingCode?: boolean; // Add withCountryCallingCode
+  placeholder?: string;
+  defaultCountry?: RPNInput.Country;
+  international?: boolean;
+  withCountryCallingCode?: boolean;
+  ref?:
+    | React.Ref<HTMLInputElement>
+    | ((instance: HTMLInputElement | null) => void); // Support react-hook-form RefCallBack
 };
 
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
