@@ -23,8 +23,11 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
-// Define PhoneInputProps to extend react-phone-number-input props
-type PhoneInputProps = RPNInput.Props<typeof RPNInput.default> & {
+// Simplified PhoneInputProps type
+type PhoneInputProps = Omit<
+  RPNInput.Props<typeof RPNInput.default>,
+  "onChange"
+> & {
   onChange?: (value: RPNInput.Value) => void;
   className?: string;
   disabled?: boolean;
@@ -32,51 +35,41 @@ type PhoneInputProps = RPNInput.Props<typeof RPNInput.default> & {
   defaultCountry?: RPNInput.Country;
   international?: boolean;
   withCountryCallingCode?: boolean;
-  ref?:
-    | React.RefCallback<HTMLInputElement>
-    | React.RefObject<React.Component<RPNInput.Props<typeof RPNInput.default>>>;
 };
 
-const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
-  React.forwardRef<
-    React.Component<
-      RPNInput.Props<typeof RPNInput.default>,
-      RPNInput.State<RPNInput.Props<typeof RPNInput.default>>
-    >,
-    PhoneInputProps
-  >(
-    (
-      {
-        className,
-        onChange,
-        value,
-        placeholder,
-        defaultCountry,
-        international,
-        withCountryCallingCode,
-        ...props
-      },
-      ref
-    ) => {
-      return (
-        <RPNInput.default
-          ref={ref}
-          className={cn("flex", className)}
-          flagComponent={FlagComponent}
-          countrySelectComponent={CountrySelect}
-          inputComponent={InputComponent}
-          smartCaret={false}
-          value={value || undefined}
-          onChange={(value) => onChange?.(value || ("" as RPNInput.Value))}
-          placeholder={placeholder}
-          defaultCountry={defaultCountry}
-          international={international}
-          withCountryCallingCode={withCountryCallingCode}
-          {...props}
-        />
-      );
-    }
-  );
+const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
+  (
+    {
+      className,
+      onChange,
+      value,
+      placeholder,
+      defaultCountry,
+      international,
+      withCountryCallingCode,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <RPNInput.default
+        ref={ref as unknown}
+        className={cn("flex", className)}
+        flagComponent={FlagComponent}
+        countrySelectComponent={CountrySelect}
+        inputComponent={InputComponent}
+        smartCaret={false}
+        value={value || undefined}
+        onChange={(value) => onChange?.(value || ("" as RPNInput.Value))}
+        placeholder={placeholder}
+        defaultCountry={defaultCountry}
+        international={international}
+        withCountryCallingCode={withCountryCallingCode}
+        {...props}
+      />
+    );
+  }
+);
 PhoneInput.displayName = "PhoneInput";
 
 const InputComponent = React.forwardRef<
@@ -110,6 +103,12 @@ const CountrySelect = ({
   const [searchValue, setSearchValue] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
 
+  // Get country name for display
+  const getCountryName = (country: RPNInput.Country) => {
+    const countryEntry = countryList.find((c) => c.value === country);
+    return countryEntry?.label || country;
+  };
+
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen} modal>
       <PopoverTrigger asChild>
@@ -121,7 +120,7 @@ const CountrySelect = ({
         >
           <FlagComponent
             country={selectedCountry}
-            countryName={selectedCountry}
+            countryName={getCountryName(selectedCountry)}
           />
           <ChevronsUpDown
             className={cn(
@@ -175,7 +174,9 @@ const CountrySelect = ({
   );
 };
 
-interface CountrySelectOptionProps extends RPNInput.FlagProps {
+interface CountrySelectOptionProps {
+  country: RPNInput.Country;
+  countryName: string;
   selectedCountry: RPNInput.Country;
   onChange: (country: RPNInput.Country) => void;
   onSelectComplete: () => void;
@@ -209,7 +210,13 @@ const CountrySelectOption = ({
   );
 };
 
-const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
+const FlagComponent = ({
+  country,
+  countryName,
+}: {
+  country: RPNInput.Country;
+  countryName: string;
+}) => {
   const Flag = flags[country];
 
   return (
