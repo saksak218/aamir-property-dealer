@@ -32,13 +32,17 @@ type PhoneInputProps = RPNInput.Props<typeof RPNInput.default> & {
   defaultCountry?: RPNInput.Country;
   international?: boolean;
   withCountryCallingCode?: boolean;
-  ref?:
-    | React.Ref<HTMLInputElement>
-    | ((instance: HTMLInputElement | null) => void); // Support react-hook-form RefCallBack
+  ref?: React.RefCallback<HTMLInputElement> | React.Ref<RPNInput.default>;
 };
 
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
-  React.forwardRef<React.ElementRef<typeof RPNInput.default>, PhoneInputProps>(
+  React.forwardRef<
+    React.Component<
+      RPNInput.Props<typeof RPNInput.default>,
+      RPNInput.State<RPNInput.Props<typeof RPNInput.default>>
+    >,
+    PhoneInputProps
+  >(
     (
       {
         className,
