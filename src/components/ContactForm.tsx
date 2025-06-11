@@ -1,9 +1,8 @@
-// components/ContactForm.tsx
 "use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, Controller } from "react-hook-form"; // Import Controller
+import { useForm, Controller } from "react-hook-form";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Button } from "@/components/ui/button";
 import {
@@ -147,7 +146,7 @@ const ContactForm = () => {
                     <Controller
                       control={form.control}
                       name="phone"
-                      render={({ field: { onChange, value, ref, onBlur } }) => (
+                      render={({ field: { onChange, value, onBlur, ref } }) => (
                         <PhoneInput
                           value={value}
                           onChange={onChange}
