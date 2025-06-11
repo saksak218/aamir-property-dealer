@@ -3,15 +3,7 @@
 import { Calendar, Phone, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-// import Contact from "../home/Contact";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 import ContactForm from "../ContactForm";
 
 export default function Banner() {

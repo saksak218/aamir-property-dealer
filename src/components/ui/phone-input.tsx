@@ -29,11 +29,27 @@ type PhoneInputProps = RPNInput.Props<typeof RPNInput.default> & {
   onChange?: (value: RPNInput.Value) => void;
   className?: string;
   disabled?: boolean;
+  placeholder?: string; // Add placeholder
+  defaultCountry?: RPNInput.Country; // Add defaultCountry
+  international?: boolean; // Add international
+  withCountryCallingCode?: boolean; // Add withCountryCallingCode
 };
 
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
   React.forwardRef<React.ElementRef<typeof RPNInput.default>, PhoneInputProps>(
-    ({ className, onChange, value, ...props }, ref) => {
+    (
+      {
+        className,
+        onChange,
+        value,
+        placeholder,
+        defaultCountry,
+        international,
+        withCountryCallingCode,
+        ...props
+      },
+      ref
+    ) => {
       return (
         <RPNInput.default
           ref={ref}
@@ -44,6 +60,10 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
           smartCaret={false}
           value={value || undefined}
           onChange={(value) => onChange?.(value || ("" as RPNInput.Value))}
+          placeholder={placeholder}
+          defaultCountry={defaultCountry}
+          international={international}
+          withCountryCallingCode={withCountryCallingCode}
           {...props}
         />
       );

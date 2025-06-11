@@ -1,9 +1,10 @@
+// components/ContactForm.tsx
 "use client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { PhoneInput } from "@/components/ui/phone-input"; // Adjust path as needed
+import { useForm, Controller } from "react-hook-form"; // Import Controller
+import { PhoneInput } from "@/components/ui/phone-input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -143,13 +144,22 @@ const ContactForm = () => {
                     Phone Number *
                   </FormLabel>
                   <FormControl>
-                    <PhoneInput
-                      {...field}
-                      placeholder="Enter phone number"
-                      defaultCountry="US"
-                      international
-                      withCountryCallingCode
-                      className="h-10"
+                    <Controller
+                      control={form.control}
+                      name="phone"
+                      render={({ field: { onChange, value, ref, onBlur } }) => (
+                        <PhoneInput
+                          value={value}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          ref={ref}
+                          placeholder="Enter phone number"
+                          defaultCountry="US"
+                          international
+                          withCountryCallingCode
+                          className="h-10"
+                        />
+                      )}
                     />
                   </FormControl>
                   <FormMessage className="mt-1 text-red-500 text-sm" />
