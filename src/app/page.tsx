@@ -1,4 +1,3 @@
-import Contact from "@/components/home/Contact";
 import FeaturedProperties from "@/components/home/FeaturedProperties";
 import Hero from "@/components/home/Hero";
 import Services from "@/components/home/Services";
@@ -15,7 +14,7 @@ export default function Home() {
       <Stats />
       <Testimonials />
       <Team />
-      <Contact />
+      {/* <Contact /> */}
     </>
   );
 }

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Menu, X, Sun, Moon, Home, Building, Phone, Info } from "lucide-react";
+import { Menu, X, Sun, Moon, Home, Building, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -38,21 +38,21 @@ const Header = () => {
       icon: <Building className="mr-1 w-4 h-4" />,
     },
     { name: "About", href: "#about", icon: <Info className="mr-1 w-4 h-4" /> },
-    {
-      name: "Contact",
-      href: "#contact",
-      icon: <Phone className="mr-1 w-4 h-4" />,
-    },
+    // {
+    //   name: "Contact",
+    //   href: "#contact",
+    //   icon: <Phone className="mr-1 w-4 h-4" />,
+    // },
   ];
 
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
+        " fixed top-0 right-0 left-0 z-20 transition-all duration-300",
         // isScrolled
         // ? "bg-white/90 backdrop-blur-md shadow-sm dark:bg-slate-900/90"
         // :
-        "bg-transparent backdrop-blur-2xl"
+        "bg-transparent   backdrop-blur-2xl"
       )}
     >
       <Banner />

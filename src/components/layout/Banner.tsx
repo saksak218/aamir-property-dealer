@@ -1,13 +1,25 @@
 "use client";
 
-import { Phone } from "lucide-react";
+import { Calendar, Phone, X } from "lucide-react";
+import { motion } from "motion/react";
 import { useState } from "react";
+// import Contact from "../home/Contact";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import ContactForm from "../ContactForm";
 
 export default function Banner() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModal, setIsModal] = useState(false);
 
   return (
-    <div className="hidden lg:flex justify-end items-center gap-x-2 bg-gray-900 px-10 py-1">
+    <div className="hidden lg:flex justify-end items-center gap-x-6 bg-gray-900 px-10 py-0.5">
       <div className="max-w-max">
         <a
           href="https://wa.me/923005019850"
@@ -36,11 +48,64 @@ export default function Banner() {
       </button>
 
       {isOpen && (
-        <div className="top-8 fixed bg-white px-3 py-2 rounded-md text-black text-xs">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="top-7 right-20 absolute bg-white px-3 py-2 rounded-md text-black text-xs"
+        >
           <p>Call us</p>
           <p>+923005019850</p>
+        </motion.div>
+      )}
+
+      <button
+        onClick={() => setIsModal(!isModal)}
+        className="flex items-center gap-x-2 text-white text-xs cursor-pointer"
+      >
+        Get in touch
+        <Calendar className="w-5" />
+      </button>
+
+      {isModal && (
+        <div className="z-50 fixed inset-0 min-h-screen">
+          <div className="flex justify-center items-center bg-gray-900/40 backdrop-blur-xs min-h-screen">
+            <div className="relative bg-white px-12 py-4 rounded-md w-full max-w-2xl">
+              <h2 className="mt-6 font-semibold text-2xl">Get In Touch</h2>
+              <div className="mt-2 pb-8">
+                <ContactForm />
+              </div>
+              <button
+                onClick={() => setIsModal(false)}
+                className="cursor-pointer"
+              >
+                <X className="top-4 right-4 absolute" />
+              </button>
+            </div>
+          </div>
         </div>
       )}
+
+      {/* 
+      <Dialog>
+        <DialogTrigger>
+          <div className="flex items-center gap-x-2 text-white text-xs cursor-pointer">
+            Get in touch
+            <Calendar className="w-5" />
+          </div>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog> */}
+
+      {/* {isModal && <Contact />} */}
     </div>
   );
 }
