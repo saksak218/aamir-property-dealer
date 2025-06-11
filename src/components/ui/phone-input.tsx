@@ -53,7 +53,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
   ) => {
     return (
       <RPNInput.default
-        ref={ref as unknown}
+        ref={ref as never}
         className={cn("flex", className)}
         flagComponent={FlagComponent}
         countrySelectComponent={CountrySelect}
