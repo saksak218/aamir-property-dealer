@@ -10,11 +10,11 @@ export default function Banner() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
 
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         setIsModal(false);
       }
     };
