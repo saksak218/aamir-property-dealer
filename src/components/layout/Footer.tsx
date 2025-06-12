@@ -148,13 +148,17 @@ const Footer = () => {
             <h3 className="mb-4 font-semibold text-white">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <MapPin className="mt-0.5 mr-2 w-5 h-5 text-slate-400" />
+                <span className="flex items-center h-[1lh]]">
+                  <MapPin className="mt-0.5 mr-2 w-4 h-4 text-slate-400" />
+                </span>
                 <span className="text-slate-400">
                   Ghouse al Azam road, near High court, Multan, Pakistan
                 </span>
               </li>
               <li className="flex items-start">
-                <MapPin className="mt-0.5 mr-2 w-5 h-5 text-slate-400" />
+                <span className="flex items-center h-[1lh]]">
+                  <MapPin className="mt-0.5 mr-2 w-4 h-4 text-slate-400" />
+                </span>
                 <span className="text-slate-400">
                   Sh. no. 20, ground floor, boulevard mall, pearl city society,
                   askari bypass road, Multan, Pakistan
