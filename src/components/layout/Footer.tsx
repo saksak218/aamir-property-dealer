@@ -13,18 +13,18 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-slate-200 py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-slate-950 py-12 text-slate-200">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
+        <div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center mb-4">
-              <Building className="h-6 w-6" />
-              <span className="ml-2 text-lg font-bold">
+              <Building className="w-6 h-6" />
+              <span className="ml-2 font-bold text-lg">
                 Aamir Property Dealer
               </span>
             </div>
-            <p className="text-slate-400 mb-4 max-w-xs">
-              Helping you find your dream property for over 15 years. Trusted by
+            <p className="mb-4 max-w-xs text-slate-400">
+              Helping you find your dream property for over 45 years. Trusted by
               thousands of satisfied customers.
             </p>
             <div className="flex space-x-4">
@@ -33,27 +33,27 @@ const Footer = () => {
                 className="text-slate-400 hover:text-white transition-colors"
                 aria-label="Facebook"
               >
-                <Facebook className="h-5 w-5" />
+                <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="#"
                 className="text-slate-400 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="w-5 h-5" />
               </a>
               <a
                 href="#"
                 className="text-slate-400 hover:text-white transition-colors"
                 aria-label="Twitter"
               >
-                <Twitter className="h-5 w-5" />
+                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <h3 className="mb-4 font-semibold text-white">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -99,7 +99,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Property Types</h3>
+            <h3 className="mb-4 font-semibold text-white">Property Types</h3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -145,27 +145,34 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+            <h3 className="mb-4 font-semibold text-white">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <MapPin className="h-5 w-5 text-slate-400 mr-2 mt-0.5" />
+                <MapPin className="mt-0.5 mr-2 w-5 h-5 text-slate-400" />
                 <span className="text-slate-400">
-                  123 Property Lane, Pearl City, Multan, Pakistan
+                  Ghouse al Azam road, near High court, Multan, Pakistan
+                </span>
+              </li>
+              <li className="flex items-start">
+                <MapPin className="mt-0.5 mr-2 w-5 h-5 text-slate-400" />
+                <span className="text-slate-400">
+                  Sh. no. 20, ground floor, boulevard mall, pearl city society,
+                  askari bypass road, Multan, Pakistan
                 </span>
               </li>
               <li className="flex items-center">
-                <Phone className="h-5 w-5 text-slate-400 mr-2" />
+                <Phone className="mr-2 w-5 h-5 text-slate-400" />
                 <span className="text-slate-400">+92 300 5019850</span>
               </li>
               <li className="flex items-center">
-                <Mail className="h-5 w-5 text-slate-400 mr-2" />
+                <Mail className="mr-2 w-5 h-5 text-slate-400" />
                 <span className="text-slate-400">info@aamirproperty.com</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400 text-sm">
+        <div className="mt-8 pt-8 border-slate-800 border-t text-slate-400 text-sm text-center">
           <p>
             &copy; {currentYear} Aamir Property Dealer. All rights reserved.
           </p>

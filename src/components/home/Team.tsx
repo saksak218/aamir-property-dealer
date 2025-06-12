@@ -25,7 +25,7 @@ const teamMembers = [
   },
   {
     id: 2,
-    name: "Sara Ahmed",
+    name: "Ahmed Raza",
     role: "Sales Director",
     image: image2,
     // image: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg",
@@ -86,15 +86,15 @@ const Team = () => {
 
   return (
     <section id="about" className="py-16 md:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="relative inline-block">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 font-bold text-3xl md:text-4xl">
+            <span className="inline-block relative">
               Meet Our Team
-              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-amber-500 rounded"></span>
+              <span className="-bottom-2 left-1/2 absolute bg-amber-500 rounded w-12 h-1 -translate-x-1/2 transform"></span>
             </span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-muted-foreground">
             Our experienced professionals are dedicated to helping you achieve
             your real estate goals with personalized service and expert
             guidance.
@@ -102,7 +102,7 @@ const Team = () => {
         </div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          className="gap-6 md:gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -114,58 +114,58 @@ const Team = () => {
               variants={itemVariants}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.3 }}
-              className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-border"
+              className="bg-card shadow-md hover:shadow-xl border border-border rounded-lg overflow-hidden transition-shadow"
             >
-              <div className="relative h-64 w-full">
+              <div className="relative w-full h-64">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
-                  className="object-cover object-center"
+                  className="object-center object-cover"
                 />
               </div>
 
               <div className="p-5">
-                <h3 className="text-xl font-semibold">{member.name}</h3>
-                <p className="text-amber-600 dark:text-amber-400 mb-3">
+                <h3 className="font-semibold text-xl">{member.name}</h3>
+                <p className="mb-3 text-amber-600 dark:text-amber-400">
                   {member.role}
                 </p>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="mb-4 text-muted-foreground text-sm">
                   {member.description}
                 </p>
 
                 <div className="space-y-2">
                   <div className="flex items-center text-sm">
-                    <Mail className="h-4 w-4 mr-2 text-muted-foreground" />
+                    <Mail className="mr-2 w-4 h-4 text-muted-foreground" />
                     <span>{member.contact.email}</span>
                   </div>
                   <div className="flex items-center text-sm">
-                    <Phone className="h-4 w-4 mr-2 text-muted-foreground" />
+                    <Phone className="mr-2 w-4 h-4 text-muted-foreground" />
                     <span>{member.contact.phone}</span>
                   </div>
                 </div>
 
-                <div className="flex mt-4 space-x-3 pt-4 border-t border-border">
+                <div className="flex space-x-3 mt-4 pt-4 border-t border-border">
                   <a
                     href="#"
                     className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                     aria-label={`${member.name}'s Facebook`}
                   >
-                    <Facebook className="h-5 w-5" />
+                    <Facebook className="w-5 h-5" />
                   </a>
                   <a
                     href="#"
                     className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                     aria-label={`${member.name}'s Instagram`}
                   >
-                    <Instagram className="h-5 w-5" />
+                    <Instagram className="w-5 h-5" />
                   </a>
                   <a
                     href="#"
                     className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                     aria-label={`${member.name}'s LinkedIn`}
                   >
-                    <Linkedin className="h-5 w-5" />
+                    <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
               </div>
