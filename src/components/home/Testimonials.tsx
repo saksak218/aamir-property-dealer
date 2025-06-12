@@ -6,19 +6,20 @@ import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import image1 from "../../../public/images/testimonials/1.jpeg";
+import image1 from "../../../public/images/testimonials/1.jpg";
 import image2 from "../../../public/images/testimonials/2.jpeg";
 import image3 from "../../../public/images/testimonials/3.jpeg";
 import image4 from "../../../public/images/testimonials/4.jpeg";
+import image5 from "../../../public/images/testimonials/5.jpeg";
 
 const testimonials = [
   {
     id: 1,
-    name: "Ahmed Khan",
+    name: "Qazalbash",
     role: "Property Buyer",
     image: image1,
     // image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
-    text: "Aamir Property Dealer helped me find my dream home in the exact location I wanted. Their attention to detail and understanding of my needs made the process incredibly smooth. I couldn't be happier with my new home!",
+    text: "I recently bought a villa in PC Society, Multan through Aamir Property Dealer and had a smooth, professional experience. Mr. Yasir and his team handled everything with transparency and ease. I highly recommend them for reliable real estate services in Multan.",
   },
   {
     id: 2,
@@ -43,6 +44,14 @@ const testimonials = [
     image: image4,
     // image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
     text: "Being a first-time buyer, I was nervous about the process. The team at Aamir Property Dealer guided me through every step, making it stress-free. Their patience and expertise were invaluable to me.",
+  },
+  {
+    id: 5,
+    name: "Ahmed Khan",
+    role: "Property Buyer",
+    image: image5,
+    // image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
+    text: "Aamir Property Dealer helped me find my dream home in the exact location I wanted. Their attention to detail and understanding of my needs made the process incredibly smooth. I couldn't be happier with my new home!",
   },
 ];
 
@@ -77,35 +86,35 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-amber-50 dark:bg-amber-950/20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="relative inline-block">
+    <section className="bg-amber-50 dark:bg-amber-950/20 py-16 md:py-24">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 font-bold text-3xl md:text-4xl">
+            <span className="inline-block relative">
               Client Testimonials
-              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-amber-500 rounded"></span>
+              <span className="-bottom-2 left-1/2 absolute bg-amber-500 rounded w-12 h-1 -translate-x-1/2 transform"></span>
             </span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-muted-foreground">
             Hear what our clients have to say about their experience working
             with us.
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="absolute left-0 md:-left-10 top-1/2 transform -translate-y-1/2 z-10">
+        <div className="relative mx-auto max-w-4xl">
+          <div className="top-1/2 left-0 md:-left-10 z-10 absolute -translate-y-1/2 transform">
             <button
               onClick={handlePrev}
-              className="p-2 rounded-full bg-white dark:bg-slate-800 shadow-md text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+              className="bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 shadow-md p-2 rounded-full text-slate-700 dark:text-slate-200 transition-colors"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="w-6 h-6" />
             </button>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl bg-white dark:bg-slate-800 shadow-lg p-6 md:p-10">
-            <div className="absolute top-6 right-8 text-amber-500 opacity-20">
-              <Quote className="h-24 w-24" />
+          <div className="relative flex items-center bg-white dark:bg-slate-800 shadow-lg p-6 md:p-10 rounded-xl h-80 overflow-hidden">
+            <div className="top-6 right-8 absolute opacity-20 text-amber-500">
+              <Quote className="w-24 h-24" />
             </div>
 
             <AnimatePresence mode="wait">
@@ -117,8 +126,8 @@ const Testimonials = () => {
                 transition={{ duration: 0.5 }}
                 className="md:flex items-center"
               >
-                <div className="md:w-1/3 mb-6 md:mb-0 flex justify-center">
-                  <div className="relative h-24 w-24 md:h-32 md:w-32 rounded-full overflow-hidden border-4 border-amber-100 dark:border-amber-900">
+                <div className="flex justify-center mb-6 md:mb-0 md:w-1/3">
+                  <div className="relative border-4 border-amber-100 dark:border-amber-900 rounded-full w-24 md:w-32 h-24 md:h-32 overflow-hidden">
                     <Image
                       quality={80}
                       src={testimonials[activeTestimonial].image}
@@ -129,8 +138,8 @@ const Testimonials = () => {
                   </div>
                 </div>
 
-                <div className="md:w-2/3 md:pl-8">
-                  <blockquote className="text-lg md:text-xl italic text-slate-700 dark:text-slate-200 mb-4">
+                <div className="md:pl-8 md:w-2/3">
+                  <blockquote className="mb-4 text-slate-700 dark:text-slate-200 text-lg md:text-xl italic">
                     &quot;{testimonials[activeTestimonial].text}&quot;
                   </blockquote>
 
@@ -147,13 +156,13 @@ const Testimonials = () => {
             </AnimatePresence>
           </div>
 
-          <div className="absolute right-0 md:-right-10 top-1/2 transform -translate-y-1/2 z-10">
+          <div className="top-1/2 right-0 md:-right-10 z-10 absolute -translate-y-1/2 transform">
             <button
               onClick={handleNext}
-              className="p-2 rounded-full bg-white dark:bg-slate-800 shadow-md text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+              className="bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 shadow-md p-2 rounded-full text-slate-700 dark:text-slate-200 transition-colors"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="w-6 h-6" />
             </button>
           </div>
         </div>
