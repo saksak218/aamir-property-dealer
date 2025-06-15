@@ -61,7 +61,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="bg-white mx-auto rounded-lg max-w-2xl">
+    <div className="bg-white dark:bg-slate-800 mx-auto rounded-lg max-w-2xl">
       <div className="mb-8">
         <p className="text-gray-500">
           Provide your contact details for a callback
@@ -76,7 +76,7 @@ const ContactForm = () => {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-medium text-gray-700 text-sm">
+                  <FormLabel className="font-medium text-gray-700 dark:text-gray-100 text-sm">
                     First Name *
                   </FormLabel>
                   <FormControl>
@@ -96,7 +96,7 @@ const ContactForm = () => {
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-medium text-gray-700 text-sm">
+                  <FormLabel className="font-medium text-gray-700 dark:text-gray-100 text-sm">
                     Last Name *
                   </FormLabel>
                   <FormControl>
@@ -118,7 +118,7 @@ const ContactForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-medium text-gray-700 text-sm">
+                  <FormLabel className="font-medium text-gray-700 dark:text-gray-100 text-sm">
                     Email Address *
                   </FormLabel>
                   <FormControl>
@@ -139,7 +139,7 @@ const ContactForm = () => {
               name="phone"
               render={({}) => (
                 <FormItem>
-                  <FormLabel className="font-medium text-gray-700 text-sm">
+                  <FormLabel className="font-medium text-gray-700 dark:text-gray-100 text-sm">
                     Phone Number *
                   </FormLabel>
                   <FormControl>

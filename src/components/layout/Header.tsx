@@ -1,9 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Menu, X, Sun, Moon, Home, Building, Info } from "lucide-react";
+import {
+  Menu,
+  X,
+  Sun,
+  Moon,
+  Home,
+  Building,
+  Info,
+  Calendar,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -17,9 +26,13 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import ContactModal from "../common/ContactModal";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
   // const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -37,6 +50,10 @@ const Header = () => {
   // }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleClick = () => {
+    setIsModal(false);
+  };
 
   const navLinks = [
     { name: "Home", href: "/", icon: <Home className="mr-1 w-4 h-4" /> },
@@ -154,22 +171,31 @@ const Header = () => {
                 <span className="ml-2">{link.name}</span>
               </Link>
             ))}
-            <div className="px-3 py-2">
+
+            <button
+              onClick={() => setIsModal(!isModal)}
+              className="flex items-center hover:bg-secondary p-2 px-3 py-2 rounded-md w-full font-medium text-base transition-colors"
+            >
+              <Calendar className="mr-2 w-4 h-4" />
+              Get in touch
+            </button>
+
+            <div className="">
               <button
                 onClick={() => {
                   setTheme(theme === "dark" ? "light" : "dark");
                   setIsOpen(false);
                 }}
-                className="flex items-center hover:bg-secondary p-2 rounded-md w-full font-medium text-base transition-colors"
+                className="flex items-center hover:bg-secondary p-2 px-3 py-2 rounded-md w-full font-medium text-base transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
                   <>
-                    <Sun className="mr-2 w-5 h-5" /> Light Mode
+                    <Sun className="mr-2 w-4 h-4" /> Light Mode
                   </>
                 ) : (
                   <>
-                    <Moon className="mr-2 w-5 h-5" /> Dark Mode
+                    <Moon className="mr-2 w-4 h-4" /> Dark Mode
                   </>
                 )}
               </button>
@@ -177,6 +203,7 @@ const Header = () => {
           </div>
         </div>
       )}
+      {isModal && <ContactModal modalRef={modalRef} onClick={handleClick} />}
     </header>
   );
 };
