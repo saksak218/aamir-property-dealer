@@ -5,6 +5,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
+import { ClerkProvider } from "@clerk/nextjs";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,9 +33,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="w-full min-h-screen">{children}</main>
-          <Footer />
+          <ClerkProvider>
+            <Header />
+
+            <main className="w-full min-h-screen">{children}</main>
+            <Footer />
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -10,6 +10,14 @@ import Image from "next/image";
 import logo from "../../../public/images/logo/logo-1.png";
 import Banner from "./Banner";
 
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   // const [isScrolled, setIsScrolled] = useState(false);
@@ -82,6 +90,24 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+
+            <SignedOut>
+              <SignInButton>
+                <button className="bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-md text-white transition-colors cursor-pointer">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md text-white transition-colors cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="hover:bg-secondary/80 p-2 rounded-full text-gray-600 text-secondary-foreground transition-colors"
