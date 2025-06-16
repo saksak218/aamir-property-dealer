@@ -112,7 +112,7 @@ const Testimonials = () => {
             </button>
           </div>
 
-          <div className="relative flex items-center bg-white dark:bg-slate-800 shadow-lg p-6 md:p-10 rounded-xl h-80 overflow-hidden">
+          <div className="relative flex items-center bg-white dark:bg-slate-800 shadow-lg p-6 md:p-10 rounded-xl md:h-80 overflow-hidden">
             <div className="top-6 right-8 absolute opacity-20 text-amber-500">
               <Quote className="w-24 h-24" />
             </div>
