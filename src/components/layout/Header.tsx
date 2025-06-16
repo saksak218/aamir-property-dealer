@@ -173,7 +173,10 @@ const Header = () => {
             ))}
 
             <button
-              onClick={() => setIsModal(!isModal)}
+              onClick={() => {
+                setIsOpen(false);
+                setIsModal(!isModal);
+              }}
               className="flex items-center hover:bg-secondary p-2 px-3 py-2 rounded-md w-full font-medium text-base transition-colors"
             >
               <Calendar className="mr-2 w-4 h-4" />

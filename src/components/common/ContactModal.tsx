@@ -13,7 +13,7 @@ const ContactModal = ({
       <div className="flex justify-center items-center bg-gray-900/40 backdrop-blur-xs min-h-screen">
         <div
           ref={modalRef}
-          className="relative bg-white dark:bg-slate-800 px-12 py-4 rounded-md w-full max-sm:max-w-[290px] max-md:max-w-sm md:max-w-2xl max-md:h-[calc(100vh-1rem)] overflow-y-auto"
+          className="relative bg-white dark:bg-slate-800 px-12 py-4 rounded-md w-full max-sm:max-w-[290px] max-md:max-w-sm md:max-w-2xl overflow-y-auto"
         >
           <h2 className="mt-6 font-semibold text-2xl">Get In Touch</h2>
           <div className="mt-2 pb-8">
