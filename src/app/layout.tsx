@@ -32,7 +32,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider>
+          <ClerkProvider
+            appearance={{ variables: { colorPrimary: "#fe5933" } }}
+          >
             <Header />
 
             <main className="w-full min-h-screen">{children}</main>

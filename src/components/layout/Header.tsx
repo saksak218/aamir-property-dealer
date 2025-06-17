@@ -122,7 +122,7 @@ const Header = () => {
             </SignedOut>
 
             <SignedIn>
-              <UserButton />
+              <UserButton afterSignOutUrl="/" />
             </SignedIn>
 
             <button
