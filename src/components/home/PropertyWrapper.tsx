@@ -6,7 +6,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client as sanityClient } from "@/sanity/client";
 
 // Helper to build image URLs from Sanity
-const urlFor = (source: any) => imageUrlBuilder(sanityClient).image(source);
+const urlFor = (source: Record<string, unknown>) =>
+  imageUrlBuilder(sanityClient).image(source);
 
 // Define the Sanity query
 const PROPERTIES_QUERY = `*[

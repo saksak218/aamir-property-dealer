@@ -82,7 +82,7 @@ const PropertyCard = ({
             setIsFavorite(!isFavorite);
           }}
           className={cn(
-            "absolute z-30 cursor-pointer top-2 right-2 p-2 rounded-full transition-colors",
+            "absolute z-20 cursor-pointer top-2 right-2 p-2 rounded-full transition-colors",
             isFavorite
               ? "bg-red-500 text-white"
               : "bg-white/80 text-gray-600 hover:bg-white"
