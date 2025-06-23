@@ -58,7 +58,7 @@ const BlogCard = ({ post, authors, categories }: BlogCardProps) => {
         </div>
         <div className="mt-auto">
           <div className="flex flex-wrap gap-2 mb-4">
-            {tags.map((tag: string) => (
+            {tags?.map((tag: string) => (
               <div
                 key={tag}
                 className="flex items-center bg-gray-200 px-2 py-0.5 rounded-full font-medium dark:text-gray-800 text-xs"

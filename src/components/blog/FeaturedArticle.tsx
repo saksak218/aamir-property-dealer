@@ -40,9 +40,6 @@ const FeaturedArticle = ({
               {featuredPost?.title}
             </h2>
             <div className="mb-6 text-white/90 text-lg leading-relaxed">
-              {/* {Array.isArray(featuredPost?.body) && (
-                  <PortableText value={featuredPost?.body} />
-                )} */}
               {featuredPost?.excerpt}
             </div>
             <div className="flex items-center space-x-6 text-white/80">

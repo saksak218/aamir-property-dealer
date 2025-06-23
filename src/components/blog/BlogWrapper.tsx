@@ -18,7 +18,9 @@ const BlogWrapper = ({
   authors,
   posts,
 }: BlogProps) => {
-  const [visiblePosts, setVisiblePosts] = useState(1);
+  const [visiblePosts, setVisiblePosts] = useState(3);
+
+  console.log(posts);
 
   return (
     <div>
@@ -52,7 +54,7 @@ const BlogWrapper = ({
           <Button
             variant="gold-outline"
             size="lg"
-            onClick={() => setVisiblePosts((prev) => prev + 1)}
+            onClick={() => setVisiblePosts((prev) => prev + 3)}
           >
             Load More Articles
           </Button>
