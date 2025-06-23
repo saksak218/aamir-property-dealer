@@ -7,9 +7,11 @@ export default function HelloLayout({
 }) {
   return (
     <>
-      <MainLayout>
-        <section className="mt-20">{children}</section>
-      </MainLayout>
+      <div className="min-h-screen">
+        <MainLayout>
+          <section className="mt-20">{children}</section>
+        </MainLayout>
+      </div>
     </>
   );
 }

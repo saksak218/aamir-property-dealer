@@ -4,12 +4,20 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowLeftIcon, Calendar, Clock, User } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MainLayout from "@/components/layout/MainLayout";
+import { Playfair } from "next/font/google";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
 const CATEGORY_QUERY = `*[_type == "category"]{_id, title, "slug": slug.current}`;
 const AUTHOR_QUERY = `*[_type == "author"]{_id, name, "slug": slug.current}`;
+
+const playFair = Playfair({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-playfair",
+});
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -46,74 +54,75 @@ export default async function PostPage({
     ? urlFor(post.mainImage)?.width(550).height(310).url()
     : null;
 
-  console.log(post);
-  // console.log(category.find((cat) => cat._id === post.category._ref)?.title);
-
   return (
-    <main className="px-12 py-12 min-h-screen container">
-      {/* Exp */}
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-6">
-          <span className="bg-amber-400/70 px-3 py-1 rounded-full font-medium text-white text-sm">
-            {category.find((cat) => cat._id === post.category._ref)?.title ||
-              "Uncategorized"}
-          </span>
-        </div>
-
-        <h1 className="mb-6 font-playfair font-bold text-slate-900 dark:text-gray-200 text-3xl md:text-4xl">
-          {post.title}
-        </h1>
-
-        <div className="flex items-center gap-6 mb-8 pb-8 border-gray-200 dark:border-gray-800 border-b text-gray-600 dark:text-gray-400 text-sm">
-          <div className="flex items-center">
-            <User className="mr-2 w-4 h-4" />
-            <span>
-              {authors.find((author) => author._id === post.author._ref)
-                ?.name || "Unknown Author"}
+    <MainLayout>
+      <div className="px-12 py-12 min-h-screen container">
+        {/* Exp */}
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-6">
+            <span className="bg-amber-600/80 px-3 py-1 rounded-full font-medium text-white text-sm">
+              {category.find((cat) => cat._id === post.category._ref)?.title ||
+                "Uncategorized"}
             </span>
           </div>
-          <div className="flex items-center">
-            <Calendar className="mr-2 w-4 h-4" />
-            <span>
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
+
+          <h1
+            className={`${playFair.className} mb-6  font-bold text-slate-900 dark:text-gray-200 text-3xl md:text-4xl`}
+          >
+            {post.title}
+          </h1>
+
+          <div className="flex items-center gap-6 mb-8 pb-8 border-gray-200 dark:border-gray-800 border-b text-gray-600 dark:text-gray-400 text-sm">
+            <div className="flex items-center">
+              <User className="mr-2 w-4 h-4" />
+              <span>
+                {authors.find((author) => author._id === post.author._ref)
+                  ?.name || "Unknown Author"}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <Calendar className="mr-2 w-4 h-4" />
+              <span>
+                {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <Clock className="mr-2 w-4 h-4" />
+              <span>{post.readTime} min read</span>
+            </div>
           </div>
-          <div className="flex items-center">
-            <Clock className="mr-2 w-4 h-4" />
-            <span>{post.readTime} min read</span>
+
+          <div className="mb-8">
+            <Image
+              src={postImageUrl ?? ""}
+              alt={post.title}
+              className="rounded-lg w-full h-64 md:h-[500px] object-cover"
+              width={1000}
+              height={800}
+            />
+          </div>
+          {/* Blog content */}
+          <div className="max-w-none text-gray-600 dark:text-gray-300 leading-relaxed">
+            {Array.isArray(post.body) && <PortableText value={post.body} />}
+          </div>
+
+          {/* Back to blogs */}
+          <div className="mt-12 pt-8 border-gray-200 border-t dark:border-t-gray-800">
+            <Link href="/blog">
+              <Button className="bg-slate-900 hover:bg-slate-900/80 text-white cursor-pointer">
+                <ArrowLeft className="mr-2 w-4 h-4" />
+                Back to All Blogs
+              </Button>
+            </Link>
           </div>
         </div>
 
-        <div className="mb-8">
-          <Image
-            src={postImageUrl ?? ""}
-            alt={post.title}
-            className="rounded-lg w-full h-64 md:h-[500px] object-cover"
-            width={1000}
-            height={800}
-          />
-        </div>
-        {/* Blog content */}
-        <div className="max-w-none text-gray-600 dark:text-gray-300 leading-relaxed">
-          {Array.isArray(post.body) && <PortableText value={post.body} />}
-        </div>
-
-        {/* Back to blogs */}
-        <div className="mt-12 pt-8 border-gray-200 border-t dark:border-t-gray-800">
-          <Link href="/blog">
-            <Button className="bg-slate-900 hover:bg-slate-900/80 text-white cursor-pointer">
-              <ArrowLeft className="mr-2 w-4 h-4" />
-              Back to All Blogs
-            </Button>
-          </Link>
-        </div>
+        {/* Exp end */}
       </div>
-
-      {/* Exp end */}
-    </main>
+    </MainLayout>
   );
 }

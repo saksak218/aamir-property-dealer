@@ -2,6 +2,13 @@ import { Calendar, Clock, User } from "lucide-react";
 import { Button } from "../ui/button-custom";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
+import { Playfair } from "next/font/google";
+
+const playFair = Playfair({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-playfair",
+});
 
 const FeaturedArticle = ({ categories, featuredPost, authors }) => {
   return (
@@ -16,10 +23,12 @@ const FeaturedArticle = ({ categories, featuredPost, authors }) => {
                   cat._id === featuredPost?.category?._ref
               )?.title || "Uncategorized"}
             </Badge>
-            <h2 className="mb-4 font-bold text-4xl md:text-5xl leading-tight">
+            <h2
+              className={`${playFair.className} mb-4 font-bold text-4xl md:text-5xl leading-tight`}
+            >
               {featuredPost?.title}
             </h2>
-            <div className="mb-6 text-white/90 text-xl leading-relaxed">
+            <div className="mb-6 text-white/90 text-lg leading-relaxed">
               {/* {Array.isArray(featuredPost?.body) && (
                   <PortableText value={featuredPost?.body} />
                 )} */}

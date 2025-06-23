@@ -25,6 +25,7 @@ export interface PropertyProps {
   area: string;
   category: string;
   featured?: boolean;
+  slug?: string; // Optional slug for linking
 }
 
 const PropertyCard = ({
@@ -37,6 +38,7 @@ const PropertyCard = ({
   bathrooms,
   area,
   featured,
+  slug,
 }: PropertyProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -52,7 +54,7 @@ const PropertyCard = ({
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
     >
-      <Link href={`/properties/${id}`} className="block">
+      <Link href={`/properties/${slug}`} className="block">
         <span className="z-20 absolute inset-0"></span>
       </Link>
       <div

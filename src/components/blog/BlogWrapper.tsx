@@ -1,16 +1,24 @@
 "use client";
-
-import { SanityDocument } from "next-sanity";
+import { useState } from "react";
 import { Button } from "../ui/button-custom";
 import BlogCard from "./BlogCard";
 import FeaturedArticle from "./FeaturedArticle";
-import { useState } from "react";
+import { SanityDocument } from "next-sanity";
 
-// import { BlogPost } from "@/sanity/schemaTypes/blogPost";
-// import { postType } from "@/sanity/schemaTypes/postType";
+interface BlogProps {
+  categories: SanityDocument[];
+  featuredPost: SanityDocument | null;
+  authors: SanityDocument[];
+  posts: SanityDocument[];
+}
 
-const BlogWrapper = ({ categories, featuredPost, authors, posts }) => {
-  const [vissiblePosts, setVissiblePosts] = useState(4);
+const BlogWrapper = ({
+  categories,
+  featuredPost,
+  authors,
+  posts,
+}: BlogProps) => {
+  const [visiblePosts, setVisiblePosts] = useState(1);
 
   return (
     <div>
@@ -23,15 +31,15 @@ const BlogWrapper = ({ categories, featuredPost, authors, posts }) => {
 
       {/* Blog Posts Grid */}
       <section>
-        <h3 className="mb-8 font-bold text-gray-900 dark:text-gray-200 text-2xl">
+        <h3 className="mb-8 font-bold text-slate-900 dark:text-slate-50 text-2xl">
           Latest Articles
         </h3>
         <div className="gap-8 grid md:grid-cols-2 lg:grid-cols-3">
-          {posts.slice(0, vissiblePosts).map((post) => (
+          {posts.slice(0, visiblePosts).map((post) => (
             <BlogCard
+              authors={authors}
               key={post._id}
               post={post}
-              authors={authors}
               categories={categories}
             />
           ))}
@@ -39,12 +47,12 @@ const BlogWrapper = ({ categories, featuredPost, authors, posts }) => {
       </section>
 
       {/* Load More */}
-      {vissiblePosts < posts.length && (
+      {visiblePosts < posts.length && (
         <div className="mt-12 text-center">
           <Button
-            onClick={() => setVissiblePosts((prev) => prev + 3)}
             variant="gold-outline"
             size="lg"
+            onClick={() => setVisiblePosts((prev) => prev + 1)}
           >
             Load More Articles
           </Button>

@@ -42,7 +42,7 @@ const BlogCard = ({ post, authors, categories }) => {
         </div>
       </div>
       <div className="flex flex-col p-6 min-h-60">
-        <h4 className="mb-2 font-bold text-gray-900 dark:text-white group-hover:text-blue-600 text-xl line-clamp-2 transition-colors">
+        <h4 className="mb-2 font-bold text-gray-900 dark:text-white group-hover:text-amber-600 text-xl line-clamp-2 transition-colors">
           {title}
         </h4>
         <div className="text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">

@@ -72,6 +72,25 @@ export const propertyType = {
       initialValue: false,
     }),
     defineField({
+      name: "amenities",
+      title: "Amenities",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "string",
+          options: {
+            list: [
+              { title: "Swimming Pool", value: "swimmingPool" },
+              { title: "Gym", value: "gym" },
+              { title: "Parking", value: "parking" },
+              { title: "Garden", value: "garden" },
+              { title: "Security", value: "security" },
+            ],
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: "categories",
       type: "array",
       of: [

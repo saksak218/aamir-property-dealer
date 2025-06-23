@@ -39,6 +39,7 @@ export interface PropertyProps {
   title: string;
   location: string;
   price: string;
+  slug?: string; // Optional slug for linking
   imageUrl: string;
   bedrooms: number;
   bathrooms: number;
@@ -87,6 +88,7 @@ export default async function PropertiesWrapper() {
         ? property.categories[0]._ref || "all"
         : "all",
     featured: property.featured || false,
+    slug: property.slug?.current || "", // Ensure slug is a string
   }));
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import {
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 
 import logo from "../../../public/images/logo/logo-1.png";
 import Banner from "./Banner";
@@ -35,19 +36,8 @@ const Header = () => {
 
   // const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 10) {
-  //       setIsScrolled(true);
-  //     } else {
-  //       setIsScrolled(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -55,14 +45,45 @@ const Header = () => {
     setIsModal(false);
   };
 
+  // Helper to scroll to section without hash in URL
+  const handleSectionNav = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname !== "/") {
+      router.push("/");
+      // Wait for navigation, then scroll
+      window.sessionStorage.setItem("scrollToSection", sectionId);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const sectionId = window.sessionStorage.getItem("scrollToSection");
+    if (sectionId && pathname === "/") {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.sessionStorage.removeItem("scrollToSection");
+      }
+    }
+  }, [pathname]);
+
   const navLinks = [
     { name: "Home", href: "/", icon: <Home className="mr-1 w-4 h-4" /> },
     {
       name: "Properties",
       href: "#properties",
       icon: <Building className="mr-1 w-4 h-4" />,
+      section: "properties",
     },
-    { name: "About", href: "#about", icon: <Info className="mr-1 w-4 h-4" /> },
+    {
+      name: "About",
+      href: "about",
+      icon: <Info className="mr-1 w-4 h-4" />,
+      section: "about",
+    },
     {
       name: "Blog",
       href: "/blog",
@@ -102,16 +123,28 @@ const Header = () => {
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="flex items-center font-medium hover:text-foreground text-sm transition-colors"
-              >
-                {link.icon}
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.section ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="flex items-center font-medium hover:text-foreground text-sm transition-colors"
+                  onClick={handleSectionNav(link.section)}
+                >
+                  {link.icon}
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="flex items-center font-medium hover:text-foreground text-sm transition-colors"
+                >
+                  {link.icon}
+                  {link.name}
+                </Link>
+              )
+            )}
 
             <SignedOut>
               <SignInButton>
@@ -165,17 +198,29 @@ const Header = () => {
       {isOpen && (
         <div className="md:hidden bg-background border-t">
           <div className="space-y-1 mx-auto px-4 pt-2 pb-3 container">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="flex items-center hover:bg-secondary px-3 py-2 rounded-md font-medium text-base transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.icon}
-                <span className="ml-2">{link.name}</span>
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.section ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="flex items-center hover:bg-secondary px-3 py-2 rounded-md font-medium text-base transition-colors"
+                  onClick={handleSectionNav(link.section)}
+                >
+                  {link.icon}
+                  <span className="ml-2">{link.name}</span>
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="flex items-center hover:bg-secondary px-3 py-2 rounded-md font-medium text-base transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.icon}
+                  <span className="ml-2">{link.name}</span>
+                </Link>
+              )
+            )}
 
             <button
               onClick={() => {
