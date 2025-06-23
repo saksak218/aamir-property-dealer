@@ -1,9 +1,16 @@
 import { urlFor } from "@/sanity/lib/image";
 import { Calendar, Clock, Tag, User } from "lucide-react";
+import { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 
-const BlogCard = ({ post, authors, categories }) => {
+interface BlogCardProps {
+  post: SanityDocument;
+  authors: SanityDocument[];
+  categories: SanityDocument[];
+}
+
+const BlogCard = ({ post, authors, categories }: BlogCardProps) => {
   const {
     _id,
     title,

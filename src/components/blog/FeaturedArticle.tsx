@@ -3,6 +3,7 @@ import { Button } from "../ui/button-custom";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Playfair } from "next/font/google";
+import { SanityDocument } from "next-sanity";
 
 const playFair = Playfair({
   subsets: ["latin"],
@@ -10,7 +11,17 @@ const playFair = Playfair({
   variable: "--font-playfair",
 });
 
-const FeaturedArticle = ({ categories, featuredPost, authors }) => {
+interface FeaturedArticleProps {
+  categories: SanityDocument[];
+  featuredPost: SanityDocument | null;
+  authors: SanityDocument[];
+}
+
+const FeaturedArticle = ({
+  categories,
+  featuredPost,
+  authors,
+}: FeaturedArticleProps) => {
   return (
     <section className="mb-16">
       <div className="relative bg-slate-900 shadow-2xl rounded-2xl overflow-hidden">
@@ -39,8 +50,7 @@ const FeaturedArticle = ({ categories, featuredPost, authors }) => {
                 <User size={16} />
                 <span>
                   {authors.find(
-                    (auth: { _id: string; name: string }) =>
-                      auth._id === featuredPost?.author?._ref
+                    (auth) => auth._id === featuredPost?.author?._ref
                   )?.name || "Unknown Author"}
                 </span>
               </div>
