@@ -20,6 +20,8 @@ import { Badge } from "@/components/ui/badge";
 import { PortableText, SanityDocument } from "next-sanity";
 import { Button } from "@/components/ui/button";
 
+const Property_QUERY = `*[_type == "property" && slug.current == $slug][0]`;
+
 const CATEGORIES_QUERY = `*[_type == "propertyCategory"]{_id, title, "slug": slug.current}`;
 
 const options = { next: { revalidate: 30 } };
@@ -27,27 +29,9 @@ const options = { next: { revalidate: 30 } };
 export default async function PropertyPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const property = await client.fetch(
-    `*[_type == "property" && slug.current == $slug][0]{
-        _id,
-        title,
-        description,
-        mainImage,
-        price,
-        bed,
-        bath,
-        featured,
-        size,
-        location,
-        images,
-        publishedAt,
-        categories,
-        amenities,
-      }`,
-    { slug: params.slug }
-  );
+  const property = await client.fetch(Property_QUERY, await params, options);
 
   const propertyCategory = await client.fetch<SanityDocument[]>(
     CATEGORIES_QUERY,
