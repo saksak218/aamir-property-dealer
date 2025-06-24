@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import Providers from "@/components/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,18 +23,20 @@ export default function RootLayout({
         className={`${inter.className} antialiased `}
         suppressHydrationWarning={true}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ClerkProvider
-            appearance={{ variables: { colorPrimary: "#fe5933" } }}
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
           >
-            {children}
-          </ClerkProvider>
-        </ThemeProvider>
+            <ClerkProvider
+              appearance={{ variables: { colorPrimary: "#fe5933" } }}
+            >
+              {children}
+            </ClerkProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

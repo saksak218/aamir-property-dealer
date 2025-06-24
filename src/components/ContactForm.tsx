@@ -14,6 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { sendEmail } from "@/lib/resend";
+import toast from "react-hot-toast";
 
 // Enhanced validation schema
 const formSchema = z.object({
@@ -44,7 +46,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const ContactForm = () => {
+const ContactForm = ({ close }: { close: () => void }) => {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,9 +57,29 @@ const ContactForm = () => {
     },
   });
 
-  function onSubmit(values: FormData) {
-    console.log("Form submitted:", values);
-    alert("Form submitted successfully!");
+  async function onSubmit(values: FormData) {
+    close();
+    toast.promise(
+      sendEmail(values),
+      {
+        loading: "Submiting your information ...",
+        success:
+          "Your contact information is submitted successfully, we will get to you soon!",
+        error: (err) => `Failed to submit information: ${err.message}`,
+      },
+      {
+        position: "bottom-center",
+        duration: 3000,
+      }
+    );
+    // await sendEmail(values).then(() => {
+    //   form.reset();
+    // });
+
+    // toast.success("Your form is submitted successfully!", {
+    //   duration: 3000,
+    //   position: "top-right",
+    // });
   }
 
   return (

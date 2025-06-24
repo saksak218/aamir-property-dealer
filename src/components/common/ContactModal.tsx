@@ -17,7 +17,7 @@ const ContactModal = ({
         >
           <h2 className="mt-6 font-semibold text-2xl">Get In Touch</h2>
           <div className="mt-2 pb-8">
-            <ContactForm />
+            <ContactForm close={onClick} />
           </div>
           <button onClick={onClick} className="cursor-pointer">
             <X className="top-4 right-4 absolute" />
