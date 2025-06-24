@@ -64,22 +64,14 @@ const ContactForm = ({ close }: { close: () => void }) => {
       {
         loading: "Submiting your information ...",
         success:
-          "Your contact information is submitted successfully, we will get to you soon!",
+          "Your contact information is submitted successfully, we will get back to you soon!",
         error: (err) => `Failed to submit information: ${err.message}`,
       },
       {
-        position: "bottom-center",
+        position: "top-right",
         duration: 3000,
       }
     );
-    // await sendEmail(values).then(() => {
-    //   form.reset();
-    // });
-
-    // toast.success("Your form is submitted successfully!", {
-    //   duration: 3000,
-    //   position: "top-right",
-    // });
   }
 
   return (
