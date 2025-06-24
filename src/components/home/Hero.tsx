@@ -116,7 +116,6 @@ const Hero = () => {
             >
               Explore Properties
             </Button>
-            {/* <div className="bg-red-900/40 hover:bg-white/20 rounded-lg transition-colors"> */}
             <Button
               className="relative text-shadow-amber-300 text-shadow-xs text-amber-500 cursor-pointer"
               variant="gold-outline"
@@ -127,7 +126,6 @@ const Hero = () => {
               </Link>
               Contact Agent <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
-            {/* </div> */}
           </div>
         </div>
 

@@ -8,10 +8,10 @@ import {
   BedDouble,
   Maximize as ArrowsMaximize,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 import { formatToLakhCrore } from "@/lib/formatToLakhCrore";
 
 export interface PropertyProps {
@@ -42,6 +42,36 @@ const PropertyCard = ({
 }: PropertyProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Check localStorage for favorite status on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("favoriteProperties");
+      if (stored) {
+        const favs = JSON.parse(stored);
+        setIsFavorite(Array.isArray(favs) && favs.includes(id));
+      }
+    }
+  }, [id]);
+
+  // Update localStorage when favorite toggled
+  const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsFavorite((prev) => {
+      const newFav = !prev;
+      if (typeof window !== "undefined") {
+        const stored = localStorage.getItem("favoriteProperties");
+        let favs: string[] = stored ? JSON.parse(stored) : [];
+        if (newFav) {
+          if (!favs.includes(id)) favs.push(id);
+        } else {
+          favs = favs.filter((fid) => fid !== id);
+        }
+        localStorage.setItem("favoriteProperties", JSON.stringify(favs));
+      }
+      return newFav;
+    });
+  };
 
   const amount = formatToLakhCrore(Number(price));
 
@@ -79,10 +109,7 @@ const PropertyCard = ({
         )}
 
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            setIsFavorite(!isFavorite);
-          }}
+          onClick={handleFavoriteClick}
           className={cn(
             "absolute z-20 cursor-pointer top-2 right-2 p-2 rounded-full transition-colors",
             isFavorite
