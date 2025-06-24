@@ -14,6 +14,7 @@ const POSTS_QUERY = `*[
   excerpt,
   category,
   author,
+  readTime
   }`;
 
 const AUTHOR_QUERY = `*[_type == "author"]{_id, name, slug, image}`;
@@ -30,6 +31,8 @@ export default async function Page() {
   ]);
 
   const featuredPost = posts.length > 0 ? posts[0] : null;
+
+  console.log(posts);
 
   return (
     <main className="mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-7xl">

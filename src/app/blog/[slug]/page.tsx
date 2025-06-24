@@ -51,28 +51,27 @@ export default async function PostPage({
   );
 
   const postImageUrl = post.mainImage
-    ? urlFor(post.mainImage)?.width(550).height(310).url()
+    ? urlFor(post.mainImage)?.width(800).height(450).url()
     : null;
 
   return (
     <MainLayout>
-      <div className="px-12 py-12 min-h-screen container">
-        {/* Exp */}
+      <div className="mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 min-h-screen container">
         <div className="mx-auto max-w-4xl">
           <div className="mb-6">
-            <span className="bg-amber-600/80 px-3 py-1 rounded-full font-medium text-white text-sm">
+            <span className="inline-block bg-amber-600/80 px-3 py-1 rounded-full font-medium text-white text-xs sm:text-sm">
               {category.find((cat) => cat._id === post.category._ref)?.title ||
                 "Uncategorized"}
             </span>
           </div>
 
           <h1
-            className={`${playFair.className} mb-6  font-bold text-slate-900 dark:text-gray-200 text-3xl md:text-4xl`}
+            className={`${playFair.className} mb-6 font-bold text-slate-900 dark:text-gray-200 text-2xl sm:text-3xl md:text-4xl leading-tight`}
           >
             {post.title}
           </h1>
 
-          <div className="flex items-center gap-6 mb-8 pb-8 border-gray-200 dark:border-gray-800 border-b text-gray-600 dark:text-gray-400 text-sm">
+          <div className="flex sm:flex-row flex-col sm:items-center gap-4 sm:gap-6 mb-8 pb-8 border-gray-200 dark:border-gray-800 border-b text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
             <div className="flex items-center">
               <User className="mr-2 w-4 h-4" />
               <span>
@@ -100,28 +99,27 @@ export default async function PostPage({
             <Image
               src={postImageUrl ?? ""}
               alt={post.title}
-              className="rounded-lg w-full h-64 md:h-[500px] object-cover"
-              width={1000}
-              height={800}
+              className="rounded-lg w-full h-auto object-cover aspect-video"
+              width={800}
+              height={450}
+              sizes="(max-width: 768px) 100vw, 800px"
+              priority
             />
           </div>
-          {/* Blog content */}
-          <div className="max-w-none text-gray-600 dark:text-gray-300 leading-relaxed">
+
+          <div className="dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 leading-relaxed prose prose-sm sm:prose-base">
             {Array.isArray(post.body) && <PortableText value={post.body} />}
           </div>
 
-          {/* Back to blogs */}
           <div className="mt-12 pt-8 border-gray-200 border-t dark:border-t-gray-800">
             <Link href="/blog">
-              <Button className="bg-slate-900 hover:bg-slate-900/80 text-white cursor-pointer">
+              <Button className="bg-slate-900 hover:bg-slate-900/80 px-4 sm:px-6 py-2 sm:py-2.5 text-white text-sm sm:text-base cursor-pointer">
                 <ArrowLeft className="mr-2 w-4 h-4" />
                 Back to All Blogs
               </Button>
             </Link>
           </div>
         </div>
-
-        {/* Exp end */}
       </div>
     </MainLayout>
   );

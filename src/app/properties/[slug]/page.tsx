@@ -21,9 +21,7 @@ import { PortableText, SanityDocument } from "next-sanity";
 import { Button } from "@/components/ui/button";
 
 const Property_QUERY = `*[_type == "property" && slug.current == $slug][0]`;
-
 const CATEGORIES_QUERY = `*[_type == "propertyCategory"]{_id, title, "slug": slug.current}`;
-
 const options = { next: { revalidate: 30 } };
 
 export default async function PropertyPage({
@@ -32,7 +30,6 @@ export default async function PropertyPage({
   params: Promise<{ slug: string }>;
 }) {
   const property = await client.fetch(Property_QUERY, await params, options);
-
   const propertyCategory = await client.fetch<SanityDocument[]>(
     CATEGORIES_QUERY,
     {},
@@ -40,7 +37,7 @@ export default async function PropertyPage({
   );
 
   const mainImageUrl = property.mainImage
-    ? urlFor(property.mainImage)?.width(1000).height(810).url()
+    ? urlFor(property.mainImage)?.width(1000).height(600).url()
     : null;
 
   const getAmenityIcon = (amenity: string) => {
@@ -62,37 +59,37 @@ export default async function PropertyPage({
 
   return (
     <MainLayout>
-      <div className="mt-16 py-12 min-h-screen container">
-        <div className="mx-20">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 min-h-screen container">
+        <div className="mx-auto max-w-5xl">
           {/* Back button */}
           <Link
             href="/"
-            className="inline-flex items-center mb-8 text-navy hover:text-amber-600/70 transition-colors"
+            className="inline-flex items-center mb-6 sm:mb-8 text-navy hover:text-amber-600 text-sm sm:text-base transition-colors"
           >
             <ArrowLeft className="mr-2 w-4 h-4" />
             Back to Home
           </Link>
 
-          <div className="gap-8 grid grid-cols-1 lg:grid-cols-2">
+          <div className="gap-6 sm:gap-8 grid grid-cols-1 lg:grid-cols-2">
             {/* Property Images */}
             <div className="space-y-4">
-              <div className="relative rounded-lg w-full h-92 overflow-hidden">
+              <div className="relative rounded-lg w-full h-64 sm:h-80 lg:h-96 overflow-hidden">
                 <Image
-                  width={1000}
-                  height={810}
+                  width={800}
+                  height={500}
                   src={mainImageUrl || "/placeholder.jpg"}
                   alt={property.title}
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
                 />
-                <Badge
-                  className={`absolute top-4 left-4 ${"bg-slate-900 text-white"}`}
-                >
+                <Badge className="top-3 left-3 absolute bg-slate-900 text-white text-xs sm:text-sm">
                   {propertyCategory.find(
                     (cat) => cat._id === property.categories[0]?._ref
                   )?.title || "Uncategorized"}
                 </Badge>
                 {property.featured && (
-                  <Badge className="top-4 right-4 absolute bg-amber-600 text-white">
+                  <Badge className="top-3 right-3 absolute bg-amber-600 text-white text-xs sm:text-sm">
                     Featured
                   </Badge>
                 )}
@@ -100,11 +97,11 @@ export default async function PropertyPage({
 
               {/* Additional Images */}
               {property.images && property.images.length > 1 && (
-                <div className="gap-4 grid grid-cols-3">
+                <div className="gap-3 sm:gap-4 grid grid-cols-3">
                   {property.images.map((img: object, index: number) => (
                     <div
                       key={index}
-                      className="rounded-lg h-24 overflow-hidden"
+                      className="rounded-lg h-20 sm:h-24 overflow-hidden"
                     >
                       <Image
                         width={300}
@@ -112,6 +109,7 @@ export default async function PropertyPage({
                         src={urlFor(img).url()}
                         alt={`${property.title} ${index + 2}`}
                         className="w-full h-full object-cover"
+                        sizes="(max-width: 768px) 33vw, 25vw"
                       />
                     </div>
                   ))}
@@ -122,14 +120,14 @@ export default async function PropertyPage({
             {/* Property Details */}
             <div className="space-y-6">
               <div>
-                <h1 className="mb-4 font-playfair font-bold text-slate-900 dark:text-white text-3xl md:text-4xl">
+                <h1 className="mb-3 font-playfair font-bold text-slate-900 dark:text-white text-2xl sm:text-3xl lg:text-4xl">
                   {property.title}
                 </h1>
-                <div className="flex items-center mb-4 text-darkGray">
-                  <MapPin className="mr-2 w-5 h-5 text-amber-400/70" />
-                  <span className="text-lg">{property.location}</span>
+                <div className="flex items-center mb-3 text-darkGray text-sm sm:text-base">
+                  <MapPin className="mr-2 w-4 sm:w-5 h-4 sm:h-5 text-amber-400" />
+                  <span>{property.location}</span>
                 </div>
-                <div className="mb-6 font-bold text-amber-600/70 text-3xl">
+                <div className="mb-4 font-bold text-amber-600 text-2xl sm:text-3xl">
                   {formatToLakhCrore(Number(property.price))}
                 </div>
               </div>
@@ -137,34 +135,40 @@ export default async function PropertyPage({
               {/* Property Features */}
               <div className="gap-4 grid grid-cols-3 py-6 border-gray-200 border-y">
                 <div className="text-center">
-                  <Bed className="mx-auto mb-2 w-6 h-6 text-amber-600/70" />
-                  <div className="font-semibold text-slate-900 dark:text-gray-300">
+                  <Bed className="mx-auto mb-2 w-5 sm:w-6 h-5 sm:h-6 text-amber-600" />
+                  <div className="font-semibold text-slate-900 dark:text-gray-300 text-sm sm:text-base">
                     {property.bed}
                   </div>
-                  <div className="text-muted-foreground text-sm">Bedrooms</div>
+                  <div className="text-muted-foreground text-xs sm:text-sm">
+                    Bedrooms
+                  </div>
                 </div>
                 <div className="text-center">
-                  <Home className="mx-auto mb-2 w-6 h-6 text-amber-600/70" />
-                  <div className="font-semibold text-slate-900 dark:text-gray-300">
+                  <Home className="mx-auto mb-2 w-5 sm:w-6 h-5 sm:h-6 text-amber-600" />
+                  <div className="font-semibold text-slate-900 dark:text-gray-300 text-sm sm:text-base">
                     {property.bath}
                   </div>
-                  <div className="text-muted-foreground text-sm">Bathrooms</div>
+                  <div className="text-muted-foreground text-xs sm:text-sm">
+                    Bathrooms
+                  </div>
                 </div>
                 <div className="text-center">
-                  <ArrowsMaximize className="mx-auto mb-2 w-6 h-6 text-amber-600/70" />
-                  <div className="font-semibold text-slate-900 dark:text-gray-300">
+                  <ArrowsMaximize className="mx-auto mb-2 w-5 sm:w-6 h-5 sm:h-6 text-amber-600" />
+                  <div className="font-semibold text-slate-900 dark:text-gray-300 text-sm sm:text-base">
                     {property.size} sq ft
                   </div>
-                  <div className="text-muted-foreground text-sm">Area</div>
+                  <div className="text-muted-foreground text-xs sm:text-sm">
+                    Area
+                  </div>
                 </div>
               </div>
 
               {/* Description */}
               <div>
-                <h3 className="mb-3 font-semibold text-navy text-xl">
+                <h3 className="mb-3 font-semibold text-navy text-lg sm:text-xl">
                   Description
                 </h3>
-                <div className="text-muted-foreground leading-relaxed">
+                <div className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                   {Array.isArray(property.description) && (
                     <PortableText value={property.description} />
                   )}
@@ -174,15 +178,15 @@ export default async function PropertyPage({
               {/* Amenities */}
               {property.amenities && (
                 <div>
-                  <h3 className="mb-3 font-semibold text-navy text-xl">
+                  <h3 className="mb-3 font-semibold text-navy text-lg sm:text-xl">
                     Amenities
                   </h3>
-                  <div className="gap-3 grid grid-cols-2">
+                  <div className="gap-3 grid grid-cols-1 sm:grid-cols-2">
                     {property.amenities.map(
                       (amenity: string, index: number) => (
                         <div
                           key={index}
-                          className="flex items-center text-muted-foreground"
+                          className="flex items-center text-muted-foreground text-sm sm:text-base"
                         >
                           {getAmenityIcon(amenity)}
                           <span className="ml-2">{amenity}</span>
@@ -195,11 +199,11 @@ export default async function PropertyPage({
 
               {/* Contact Button */}
               <div className="pt-6">
-                <Button className="relative bg-amber-500 hover:bg-amber-600 py-3 w-full text-white text-lg">
+                <Button className="relative bg-amber-500 hover:bg-amber-600 py-2 sm:py-3 w-full text-white text-base sm:text-lg">
                   <Link href="https://wa.me/923005019850" target="_blank">
                     <span className="absolute inset-0"></span>
+                    Contact Agent
                   </Link>
-                  Contact Agent
                 </Button>
               </div>
             </div>

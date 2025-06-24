@@ -17,7 +17,7 @@ const teamMembers = [
     image: image1,
     // image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
     description:
-      "With over 15 years in real estate, Aamir has built a reputation for integrity and excellence in property dealing.",
+      "With over 45 years in real estate, Aamir Property Dealer has built a reputation for integrity and excellence in property dealing.",
     contact: {
       email: "aamir@aamirproperty.com",
       phone: "+92 300 1234567",

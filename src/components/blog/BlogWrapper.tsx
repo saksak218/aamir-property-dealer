@@ -20,8 +20,6 @@ const BlogWrapper = ({
 }: BlogProps) => {
   const [visiblePosts, setVisiblePosts] = useState(3);
 
-  console.log(posts);
-
   return (
     <div>
       {/* Featured Article */}

@@ -74,7 +74,7 @@ const Header = () => {
     { name: "Home", href: "/", icon: <Home className="mr-1 w-4 h-4" /> },
     {
       name: "Properties",
-      href: "#properties",
+      href: "properties",
       icon: <Building className="mr-1 w-4 h-4" />,
       section: "properties",
     },
@@ -100,9 +100,6 @@ const Header = () => {
     <header
       className={cn(
         " fixed top-0 right-0 left-0 z-30 transition-all duration-300",
-        // isScrolled
-        // ? "bg-white/90 backdrop-blur-md shadow-sm dark:bg-slate-900/90"
-        // :
         "bg-transparent   backdrop-blur-2xl"
       )}
     >
@@ -114,10 +111,6 @@ const Header = () => {
               <div className="w-12">
                 {<Image className="rounded-md" src={logo} alt="Logo" />}
               </div>
-              {/* <Building className="w-8 h-8 text-primary" />
-              <span className="ml-2 font-bold text-foreground text-xl tracking-tight">
-                Aamir Property Dealer
-              </span> */}
             </Link>
           </div>
 
@@ -125,7 +118,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) =>
               link.section ? (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   className="flex items-center font-medium hover:text-foreground text-sm transition-colors"
@@ -133,7 +126,7 @@ const Header = () => {
                 >
                   {link.icon}
                   {link.name}
-                </a>
+                </Link>
               ) : (
                 <Link
                   key={link.name}
@@ -165,7 +158,7 @@ const Header = () => {
 
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="hover:bg-secondary/80 p-2 rounded-full text-gray-600 text-secondary-foreground transition-colors"
+              className="hover:bg-secondary/80 p-2 rounded-full text-secondary-foreground transition-colors cursor-pointer"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (

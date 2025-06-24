@@ -9,30 +9,45 @@ import Image from "next/image";
 import slide1 from "../../../public/images/slider/1.jpeg";
 import slide2 from "../../../public/images/slider/2.jpeg";
 import slide3 from "../../../public/images/slider/3.jpeg";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   const slides = [
     {
       image: slide1,
-      // image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
       title: "Find Your Dream Home",
       subtitle: "Discover premium properties in prime locations",
     },
     {
       image: slide2,
-      // "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg",
       title: "Luxury Living Spaces",
       subtitle: "Experience comfort and elegance in every corner",
     },
     {
       image: slide3,
-      // image: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg",
       title: "Premium Real Estate",
       subtitle: "Invest in properties with exceptional value",
     },
   ];
+
+  const pathname =
+    typeof window !== "undefined" ? window.location.pathname : "/";
+
+  // Helper to scroll to section without hash in URL
+  const handleSectionNav = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname !== "/") {
+      router.push("/");
+      window.sessionStorage.setItem("scrollToSection", sectionId);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,21 +75,16 @@ const Hero = () => {
               alt="Slide image"
             />
 
-            {/* <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            > */}
             <div className="absolute inset-0 bg-black/40"></div>
-            {/* </div> */}
           </div>
         ))}
       </div>
 
       {/* Content */}
-      <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto pt-20">
+      <div className="relative flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 h-full text-white text-center">
+        <div className="mx-auto pt-20 max-w-4xl">
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 transition-opacity duration-500 ease-in-out"
+            className="mb-6 font-bold text-4xl sm:text-5xl md:text-6xl transition-opacity duration-500 ease-in-out"
             style={{
               opacity: 1,
               animation: `fadeInUp 0.8s ease-out`,
@@ -83,7 +93,7 @@ const Hero = () => {
             {slides[currentSlide].title}
           </h1>
           <p
-            className="text-xl sm:text-2xl mb-8 transition-opacity duration-500 ease-in-out delay-200"
+            className="mb-8 text-xl sm:text-2xl transition-opacity duration-500 ease-in-out delay-200"
             style={{
               opacity: 1,
               animation: `fadeInUp 0.8s 0.2s ease-out both`,
@@ -98,17 +108,31 @@ const Hero = () => {
               animation: `fadeInUp 0.8s 0.4s ease-out both`,
             }}
           >
-            <Button variant="gold" size="xl">
+            <Button
+              onClick={handleSectionNav("properties")}
+              className="cursor-pointer"
+              variant="gold"
+              size="xl"
+            >
               Explore Properties
             </Button>
-            <Button variant="gold-outline" size="xl">
-              Contact an Agent <ArrowRight className="ml-2 h-4 w-4" />
+            {/* <div className="bg-red-900/40 hover:bg-white/20 rounded-lg transition-colors"> */}
+            <Button
+              className="relative text-shadow-amber-300 text-shadow-xs text-amber-500 cursor-pointer"
+              variant="gold-outline"
+              size="xl"
+            >
+              <Link href="https://wa.me/923005019850" target="_blank">
+                <span className="absolute inset-0"></span>
+              </Link>
+              Contact Agent <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
+            {/* </div> */}
           </div>
         </div>
 
         <div
-          className="w-full max-w-4xl px-4 sm:px-0 transition-opacity duration-500 ease-in-out delay-600"
+          className="px-4 sm:px-0 w-full max-w-4xl transition-opacity duration-500 ease-in-out delay-600"
           style={{
             opacity: 1,
             animation: `fadeInUp 0.8s 0.6s ease-out both`,
@@ -119,7 +143,7 @@ const Hero = () => {
       </div>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="bottom-6 left-1/2 absolute flex space-x-2 -translate-x-1/2 transform">
         {slides.map((_, index) => (
           <button
             key={index}
