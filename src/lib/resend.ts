@@ -13,7 +13,7 @@ interface SendEmailValues {
 
 export const sendEmail = async (values: SendEmailValues): Promise<void> => {
   await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: "yasir@aamirpropertydealer.com",
     to: "yasirmoon@gmail.com",
     subject: "New Lead on Aamir Property Dealer!",
     html: `
