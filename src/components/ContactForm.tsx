@@ -167,7 +167,7 @@ const ContactForm = ({ close }: { close: () => void }) => {
                           onBlur={onBlur}
                           ref={ref}
                           placeholder="Enter phone number"
-                          defaultCountry="US"
+                          defaultCountry="PK"
                           international
                           withCountryCallingCode
                           className="h-10"
